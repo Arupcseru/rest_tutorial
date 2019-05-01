@@ -4,9 +4,37 @@ HOST: https://petscollection.herokuapp.com/
 # rest_tutorial
 It's a simple API allowing user to view information of pets.
 
+### Allowed HTTPs requests:
+<pre>
+POST    : To create resource 
+PUT     : Update resource
+GET     : Get a resource or list of resources
+DELETE  : To delete resource
+</pre>
+
+### Description Of Usual Server Responses:
+- 200 `OK` - the request was successful (some API calls may return 201 instead).
+- 201 `Created` - the request was successful and a resource was created.
+- 204 `No Content` - the request was successful but there is no representation to return (i.e. the response is empty).
+- 400 `Bad Request` - the request could not be understood or was missing required parameters.
+- 404 `Not Found` - resource was not found.
+- 405 `Method Not Allowed` - requested method is not supported for resource.
+
+# Pets
+Represents pets details. 
+
+---
+**Pets attributes:**
+
+- id `(Number)` : unique identifier. 
+- name `(String)` : Name of pets.
+- species `(String)` : Species od pets.
+- breed `(String)` : Breed of pets.
+---
+
 ## Pets Collection [/pets/]
 
-### List All Pets [GET]
+### Get All Pets [GET]
 
 + Response 200 (application/json)
 
@@ -71,7 +99,10 @@ Pets object is returned.
         }    
 
 + Response 201 (application/json)
-
+    
+    + Headers
+            
+            Location: /pets/id
 
     + Body
 
@@ -80,6 +111,24 @@ Pets object is returned.
                 "species": "cat",
                 "breed": "tabby"
             }
+## Access pets Informations by id : [/Students/{id}]
+
+---
+
+### Get a spacific pets data [GET]
+
+
++ Parameters
+    + id (number) - ID of the User in the form of a string
+
++ Response 200 (application/json)
+        
+        {
+           "name": "Liam",
+           "species": "cat",
+            "breed": "tabby"
+        }
+
             
 ##Modify Pets Information  [/pets/{id}]
 
