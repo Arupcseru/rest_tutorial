@@ -1,80 +1,107 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://petscollection.herokuapp.com/
 
 # rest_tutorial
+It's a simple API allowing user to view information of pets.
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+## Pets Collection [/pets/]
 
-## Questions Collection [/questions]
-
-### List All Questions [GET]
+### List All Pets [GET]
 
 + Response 200 (application/json)
 
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
+                "_id": "5cbd7ef4b3dedb055ca04503",
+                "name": "Liam",
+                "species": "cat",
+                "breed": "tabby"
+            },
+            {
+                "_id": "5cbdb86fb3dedb055ca04504",
+                "name": "Spot",
+                "species": "dog",
+                "breed": "pitbull"
+            },
+            {
+                "_id": "5cbdb8a4b3dedb055ca04505",
+                "name": "Daisy",
+                "species": "cat",
+                "breed": "calico"
+            },
+            {
+                "_id": "5cbdb8c5b3dedb055ca04506",
+                "name": "Bella",
+                "species": "dog",
+                "breed": "australian shepard"
+            },
+            {
+                "_id": "5cc8745244d9ca1cacdb0cff",
+                "name": null,
+                "species": null,
+                "breed": null
+            },
+            {
+                "_id": "5cc8747844d9ca1cacdb0d00",
+                "name": "Liam",
+                "species": "cat",
+                "breed": "tabby"
+            },
+            {
+                "_id": "5cc874fd44d9ca1cacdb0d01",
+                "name": "Liam",
+                "species": "cat",
+                "breed": "tabby"
             }
         ]
 
-### Create a New Question [POST]
+### Add a New Pet Information [POST]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+You may add new pet data using this action. It takes a JSON object 
+containing (name, species, and breed), and assigns it a new ObjectId.
+This object is then inserted into the pets collection, and the new 
+Pets object is returned.
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
+            "name": "Liam",
+            "species": "cat",
+            "breed": "tabby"
+        }    
 
 + Response 201 (application/json)
 
-    + Headers
-
-            Location: /questions/2
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "name": "Liam",
+                "species": "cat",
+                "breed": "tabby"
             }
+            
+##Modify Pets Information  [/pets/{id}]
+
++ Parameters
+    + id (number) - ID of the User in the form of a hex string
+    
+### Update Pets data [PUT/id]
+
+You may updates existing pet infromation using this action.
+It takes a JSON object containing (name, species, and breed).
+The id in the request URL is the _id of the document to be modified.
+
++ Request (application/json)
+
+        {
+            "name": "Liam",
+            "species": "cat",
+            "breed": "tabby"
+        }
+
++ Response 200 (application/json)
+
+### Delete pets data [DELETE/id]
+                Thanks for using our app.
++ Response 204
